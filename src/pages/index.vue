@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import HelloWorld from '~/components/HelloWorld.vue'
+import RichEditor from '~/components/RichEditor.vue'
+const tag = ref(false)
 </script>
 
 <template>
-	<h1>index.vue</h1>
-	<HelloWorld
-		world="world"
-	/>
-	<button>Hello, World!</button>
-	<div class="i-mi:deno w-[48px] h-[48px]" />
-	<div class="i-mi:fastify w-[48px] h-[48px] c-red-600" />
+	<main class="flex flex-col items-center gap-[16px] p-[16px]">
+		<h1>hello-quilljs</h1>
+		<RichEditor />
+		<span>
+			<label for="tag">enabled tag: </label>
+			<input
+				id="tag"
+				v-model="tag"
+				type="checkbox"
+			>
+		</span>
+	</main>
 </template>

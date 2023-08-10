@@ -1,1 +1,1 @@
-export const LOCAL_STORAGE_PREFIX = 'playground:'
+export const LOCAL_STORAGE_PREFIX = 'hello-quilljs:'
