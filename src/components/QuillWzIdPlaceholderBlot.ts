@@ -21,7 +21,7 @@ export default function initWzIdPlaceholderBlot(Quill: any) {
 		}
 
 		static value(domNode: HTMLElement) {
-			return domNode.dataset
+			return domNode.id
 		}
 
 		length() {
