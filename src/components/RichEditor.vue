@@ -17,7 +17,6 @@ onMounted(() => {
 		placeholder: 'hello world..',
 		formats: ['placeholder'],
 		modules: {
-			// toolbar: false,
 			toolbar: { container: '#toolbar' },
 			placeholder: true,
 		},
@@ -32,11 +31,9 @@ onMounted(() => {
 <template>
 	<section class="max-w-[380px] w-full">
 		<div id="toolbar">
-			<select class="ql-placeholder">
-				<option value="foo">
-					Foo
-				</option>
-			</select>
+			<button class="ql-placeholder">
+				Foo
+			</button>
 		</div>
 		<div ref="editorRef" />
 
