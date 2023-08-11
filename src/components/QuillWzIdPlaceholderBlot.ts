@@ -6,7 +6,6 @@ const ID = '::$wazzupIdPlaceholder'
 const LABEL = 'ID: XXXX-XXXX'
 
 export default function initWzIdPlaceholderBlot(Quill: QuillTypes.Quill): any {
-	// @ts-ignore
 	const Embed: typeof ParchmentTypes.EmbedBlot = Quill.import('blots/embed')
 
 	class WzIdPlaceholderBlot extends Embed {

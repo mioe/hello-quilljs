@@ -3,14 +3,18 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 
 import Quill from 'quill'
+import * as QuillTypes from 'quill'
+
 import initWzIdPlaceholderModule from '~/components/QuillWzIdPlaceholderModule'
 
-const editor = shallowRef()
+const quill = ref<QuillTypes.Quill>()
+const editorRef = shallowRef()
+const editorDelta = ref()
 
 Quill.register('modules/placeholder', initWzIdPlaceholderModule(Quill))
 
 onMounted(() => {
-	editor.value = Object.freeze(new Quill(editor.value, {
+	quill.value = markRaw(new Quill(editorRef.value, {
 		theme: 'snow',
 		formats: [
 			'placeholder',
@@ -25,6 +29,10 @@ onMounted(() => {
 			},
 		},
 	}))
+
+	quill.value.on('text-change', () => {
+		editorDelta.value = quill.value?.getContents()
+	})
 })
 </script>
 
@@ -37,6 +45,34 @@ onMounted(() => {
 				</option>
 			</select>
 		</div>
-		<div ref="editor" />
+		<div ref="editorRef" />
+
+		<section>
+			<p>editorDelta:</p>
+			<p>{{ editorDelta }}</p>
+		</section>
 	</section>
 </template>
+
+<style>
+.ql-picker.ql-placeholder {
+	width: 118px;
+}
+
+.ql-picker.ql-placeholder > span.ql-picker-label::before {
+	content: 'Placeholders';
+}
+
+.ql-picker.ql-placeholder > span.ql-picker-options > span.ql-picker-item::before {
+	content: attr(data-label);
+}
+
+.ql-wz-id-placeholder {
+	background-color: #eee;
+	color: #212121;
+	border-radius: 16px;
+	display: inline-block;
+	letter-spacing: .4px;
+	padding: 0 10px;
+}
+</style>
