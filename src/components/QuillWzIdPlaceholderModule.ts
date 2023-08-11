@@ -1,6 +1,5 @@
 import * as QuillTypes from 'quill'
 import initWzIdPlaceholderBlot from '~/components/QuillWzIdPlaceholderBlot'
-import { Placeholder } from '~/components/types'
 
 export default function initWzIdPlaceholderModule(Quill: any) {
 	const Parchment = Quill.import('parchment')
@@ -9,8 +8,6 @@ export default function initWzIdPlaceholderModule(Quill: any) {
 	Quill.register(PlaceholderBlot)
 
 	class WzIdPlaceholderModule {
-		private placeholders: Placeholder[] = [{id: 'foo', label: 'Foo'}]
-
 		constructor(private quill: any) {
 			this.quill.getModule('toolbar').addHandler('placeholder', this.toolbarHandler)
 			this.quill.root.addEventListener('click', <EventListener>this.onClick)
@@ -40,13 +37,11 @@ export default function initWzIdPlaceholderModule(Quill: any) {
 			}
 		}
 
-		toolbarHandler = (identifier: string) => {
+		toolbarHandler = () => {
 			const selection = this.quill.getSelection()
-			const placeholder = this.placeholders.filter((pl: Placeholder) => pl.id === identifier)[0]
-			if (!placeholder) throw new Error(`Missing placeholder for ${identifier}`)
 
 			this.quill.deleteText(selection.index, selection.length)
-			this.quill.insertEmbed(selection.index, 'placeholder', placeholder, Quill.sources.USER)
+			this.quill.insertEmbed(selection.index, 'placeholder', true, Quill.sources.USER)
 			this.quill.setSelection(selection.index + 1, 0)
 		}
 	}

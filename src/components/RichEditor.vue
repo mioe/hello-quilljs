@@ -7,6 +7,7 @@ import initWzIdPlaceholderModule from '~/components/QuillWzIdPlaceholderModule'
 
 const quill = ref()
 const editorRef = shallowRef()
+const qlPlaceholderButtonRef = shallowRef()
 const editorDelta = ref()
 
 Quill.register('modules/placeholder', initWzIdPlaceholderModule(Quill))
@@ -17,8 +18,7 @@ onMounted(() => {
 		placeholder: 'hello world..',
 		formats: ['placeholder'],
 		modules: {
-			// toolbar: false,
-			toolbar: { container: '#toolbar' },
+			toolbar: { container: '#ql-ghost-toolbar' },
 			placeholder: true,
 		},
 	}))
@@ -31,35 +31,29 @@ onMounted(() => {
 
 <template>
 	<section class="max-w-[380px] w-full">
-		<div id="toolbar">
-			<select class="ql-placeholder">
-				<option value="foo">
-					Foo
-				</option>
-			</select>
+		<div
+			v-show="false"
+			id="ql-ghost-toolbar"
+		>
+			<button
+				ref="qlPlaceholderButtonRef"
+				class="ql-placeholder"
+			/>
 		</div>
 		<div ref="editorRef" />
 
+		<button @click="qlPlaceholderButtonRef.click()">
+			toggle placeholder
+		</button>
+
 		<section>
 			<p>editorDelta:</p>
-			<p>{{ editorDelta }}</p>
+			<pre>{{ editorDelta }}</pre>
 		</section>
 	</section>
 </template>
 
 <style>
-.ql-picker.ql-placeholder {
-	width: 118px;
-}
-
-.ql-picker.ql-placeholder > span.ql-picker-label::before {
-	content: 'Placeholders';
-}
-
-.ql-picker.ql-placeholder > span.ql-picker-options > span.ql-picker-item::before {
-	content: attr(data-label);
-}
-
 .ql-wz-id-placeholder {
 	background-color: #eee;
 	color: #212121;
