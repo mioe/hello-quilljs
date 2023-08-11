@@ -75,3 +75,26 @@ img {
 	max-width: 100%;
 	display: block;
 }
+
+
+.ql-picker.ql-placeholder {
+	width: 118px;
+}
+
+.ql-picker.ql-placeholder > span.ql-picker-label::before {
+	content: 'Placeholders';
+}
+
+.ql-picker.ql-placeholder > span.ql-picker-options > span.ql-picker-item::before {
+	content: attr(data-label);
+}
+
+.ql-wz-id-placeholder {
+	background-color: #eee;
+	color: #212121;
+	border-radius: 16px;
+	display: inline-block;
+	letter-spacing: .4px;
+	padding: 0 10px;
+	margin: 0 4px;
+}

@@ -4,6 +4,6 @@ export interface Placeholder {
 }
 
 export interface ModuleOptions {
-	placeholder: Placeholder,
+	placeholder: Placeholder[],
 	className?: string,
 }
