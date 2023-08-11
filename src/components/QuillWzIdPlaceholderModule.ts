@@ -1,5 +1,4 @@
 import * as QuillTypes from 'quill'
-import { default as ParchmentTypes } from 'parchment'
 
 import initWzIdPlaceholderBlot from '~/components/QuillWzIdPlaceholderBlot'
 import {
@@ -8,38 +7,37 @@ import {
 } from '~/components/types'
 
 export interface ModuleType {
-	new(quill: QuillTypes.Quill, options: ModuleOptions): any
+	new(quill: any, options: ModuleOptions): any
 }
 
 export default function initWzIdPlaceholderModule(
-	Quill: QuillTypes.Quill,
+	Quill: any,
 	options?: {
 		className?: string
 	},
 ): ModuleType {
-	const Parchment: typeof ParchmentTypes = Quill.import('parchment')
+	const Parchment = Quill.import('parchment')
 	const PlaceholderBlot = initWzIdPlaceholderBlot(Quill)
 	PlaceholderBlot.className = options?.className || 'ql-wz-id-placeholder'
 
 	Quill.register(PlaceholderBlot)
 
 	class WzIdPlaceholderModule {
-		private placeholders: Placeholder[]
+		private placeholders: Placeholder[] = []
 
-		constructor(private quill: QuillTypes.Quill, options: ModuleOptions) {
+		constructor(private quill: any, options: ModuleOptions) {
 			this.placeholders = options.placeholders
-
 			this.quill.getModule('toolbar').addHandler('placeholder', this.toolbarHandler)
 			this.quill.root.addEventListener('click', <EventListener>this.onClick)
 			this.quill.on('text-change', this.onTextChange)
 		}
 
-		onTextChange = (_: any, oldDelta: QuillTypes.DeltaStatic, source: QuillTypes.Sources) => {
+		onTextChange = (_: any, oldDelta: any, source: QuillTypes.Sources) => {
 			if (source === Quill.sources.USER) {
 				const currrentContents = this.quill.getContents()
 				const delta = currrentContents.diff(oldDelta)
 
-				const shouldRevert = delta.ops.filter(op => op.insert &&
+				const shouldRevert = delta.ops.filter((op: any) => op.insert &&
 					op.insert.placeholder && op.insert.placeholder.required).length
 
 				if (shouldRevert) {
@@ -48,7 +46,7 @@ export default function initWzIdPlaceholderModule(
 			}
 		}
 
-		onClick = (ev: QuillTypes.EditorEvent) => {
+		onClick = (ev: any) => {
 			const blot = Parchment.find(ev.target.parentNode)
 
 			if (blot instanceof PlaceholderBlot) {

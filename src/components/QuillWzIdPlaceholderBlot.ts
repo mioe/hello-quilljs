@@ -1,17 +1,13 @@
-import * as QuillTypes from 'quill'
-import { default as ParchmentTypes } from 'parchment'
-
 const ID = '::$wazzupIdPlaceholder'
 const LABEL = 'ID: XXXX-XXXX'
 
-export default function initWzIdPlaceholderBlot(Quill: QuillTypes.Quill): any {
-	const Embed: typeof ParchmentTypes.EmbedBlot = Quill.import('blots/embed')
+export default function initWzIdPlaceholderBlot(Quill: any) {
+	const Embed = Quill.import('blots/embed')
 
 	class WzIdPlaceholderBlot extends Embed {
 		static blotName = 'placeholder'
 		static tagName = 'span'
 		static className: string
-		declare public domNode: HTMLElement
 
 		static create() {
 			const node: HTMLElement = <HTMLElement>super.create()
