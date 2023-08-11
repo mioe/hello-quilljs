@@ -1,6 +1,5 @@
 import * as QuillTypes from 'quill'
 import { default as ParchmentTypes } from 'parchment'
-import { Placeholder } from '~/components/types'
 
 const ID = '::$wazzupIdPlaceholder'
 const LABEL = 'ID: XXXX-XXXX'
@@ -14,8 +13,8 @@ export default function initWzIdPlaceholderBlot(Quill: QuillTypes.Quill): any {
 		static className: string
 		declare public domNode: HTMLElement
 
-		static create(value: Placeholder) {
-			const node: HTMLElement = <HTMLElement>super.create(value)
+		static create() {
+			const node: HTMLElement = <HTMLElement>super.create()
 			node.setAttribute('id', ID)
 			node.setAttribute('spellcheck', 'false')
 
