@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import RichEditor from '~/components/RichEditor.vue'
-const tag = ref(false)
 </script>
 
 <template>
@@ -24,14 +23,6 @@ const tag = ref(false)
 		<div class="w-full flex flex-col items-center gap-[4px]">
 			<h2>result:</h2>
 			<RichEditor />
-			<span>
-				<label for="tag">enabled tag: </label>
-				<input
-					id="tag"
-					v-model="tag"
-					type="checkbox"
-				>
-			</span>
 		</div>
 	</main>
 </template>
