@@ -15,7 +15,7 @@ export default function initWzIdPlaceholderModule(Quill: any) {
 		}
 
 		onTextChange = (
-			delta: QuillTypes.Delta,
+			_: QuillTypes.Delta,
 			oldDelta: QuillTypes.Delta,
 			source: QuillTypes.Sources,
 		) => {
@@ -24,7 +24,7 @@ export default function initWzIdPlaceholderModule(Quill: any) {
 				const delta = currentContents.diff(oldDelta)
 
 				const shouldRevert = delta.ops.filter(
-					(op: QuillTypes.DeltaOperation) => op.insert && op.insert.placeholder,
+					(op: QuillTypes.DeltaOperation) => op.insert && op.insert.placeholder && op.insert.placeholder.required,
 				).length
 
 				if (shouldRevert) {
