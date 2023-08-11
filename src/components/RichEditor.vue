@@ -3,11 +3,9 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 
 import Quill from 'quill'
-import * as QuillTypes from 'quill'
-
 import initWzIdPlaceholderModule from '~/components/QuillWzIdPlaceholderModule'
 
-const quill = ref<QuillTypes.Quill>()
+const quill = ref()
 const editorRef = shallowRef()
 const editorDelta = ref()
 
@@ -31,7 +29,7 @@ onMounted(() => {
 	}))
 
 	quill.value.on('text-change', () => {
-		editorDelta.value = quill.value?.getContents()
+		editorDelta.value = quill.value.getContents()
 	})
 })
 </script>
