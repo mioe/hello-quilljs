@@ -14,17 +14,12 @@ Quill.register('modules/placeholder', initWzIdPlaceholderModule(Quill))
 onMounted(() => {
 	quill.value = markRaw(new Quill(editorRef.value, {
 		theme: 'snow',
-		formats: [
-			'placeholder',
-		],
+		placeholder: 'hello world..',
+		formats: ['placeholder'],
 		modules: {
 			// toolbar: false,
 			toolbar: { container: '#toolbar' },
-			placeholder: {
-				placeholders: [
-					{id: 'foo', label: 'Foo'},
-				],
-			},
+			placeholder: true,
 		},
 	}))
 

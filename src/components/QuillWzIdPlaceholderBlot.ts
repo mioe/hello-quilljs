@@ -7,7 +7,7 @@ export default function initWzIdPlaceholderBlot(Quill: any) {
 	class WzIdPlaceholderBlot extends Embed {
 		static blotName = 'placeholder'
 		static tagName = 'span'
-		static className: string
+		static className = 'ql-wz-id-placeholder'
 
 		static create() {
 			const node: HTMLElement = <HTMLElement>super.create()
@@ -20,15 +20,15 @@ export default function initWzIdPlaceholderBlot(Quill: any) {
 			return node
 		}
 
-		static value(domNode: HTMLElement): DOMStringMap {
+		static value(domNode: HTMLElement) {
 			return domNode.dataset
 		}
 
-		length(): number {
+		length() {
 			return 1
 		}
 
-		deleteAt(index: number, length: number): void {
+		deleteAt(index: number, length: number) {
 			super.deleteAt(index, length)
 		}
 	}
